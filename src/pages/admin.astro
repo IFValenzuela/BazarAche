@@ -1,0 +1,717 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Bazar Ache — Admin" description="Panel de administración">
+
+  <!-- ═══════════════════════════════════════════════════════
+       LOGIN SCREEN
+       ═══════════════════════════════════════════════════════ -->
+  <div id="login-screen" class="min-h-dvh flex items-center justify-center px-6">
+    <div class="w-full max-w-sm">
+      <div class="panel-border p-8">
+        <h1 class="type-display text-2xl text-forest mb-1">Bazar Ache</h1>
+        <p class="type-label text-xs text-charcoal/40 mb-8">Panel de administración</p>
+
+        <form id="login-form" class="flex flex-col gap-4">
+          <div>
+            <label for="login-email" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Correo electrónico</label>
+            <input
+              id="login-email"
+              type="email"
+              required
+              autocomplete="email"
+              class="w-full px-3 py-2.5 text-sm bg-cream panel-border focus:border-forest outline-none transition-editorial"
+              placeholder="admin@bazarache.com"
+            />
+          </div>
+          <div>
+            <label for="login-password" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Contraseña</label>
+            <input
+              id="login-password"
+              type="password"
+              required
+              autocomplete="current-password"
+              class="w-full px-3 py-2.5 text-sm bg-cream panel-border focus:border-forest outline-none transition-editorial"
+              placeholder="••••••••"
+            />
+          </div>
+          <div id="login-error" class="text-xs text-red-700 hidden"></div>
+          <button
+            type="submit"
+            class="w-full py-3 bg-forest text-cream type-label text-xs hover:bg-charcoal transition-editorial"
+          >
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
+      <p class="text-center text-xs text-charcoal/30 mt-4">
+        <a href="/" class="hover:text-forest transition-editorial">← Volver al catálogo</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ADMIN DASHBOARD
+       ═══════════════════════════════════════════════════════ -->
+  <div id="admin-dashboard" class="hidden min-h-dvh">
+
+    <!-- Admin Header -->
+    <header class="panel-border-b bg-cream sticky top-0 z-50">
+      <div class="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <a href="/" class="type-display text-xl text-forest hover:opacity-80 transition-editorial">
+            Bazar Ache
+          </a>
+          <span class="type-label text-[0.6rem] px-2 py-0.5 bg-sage text-forest">Admin</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span id="admin-email" class="type-mono text-xs text-charcoal/40 hidden sm:block"></span>
+          <button
+            id="logout-btn"
+            class="type-label text-xs px-4 py-2 panel-border text-charcoal/60 hover:bg-charcoal hover:text-cream transition-editorial"
+          >
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="max-w-[1400px] mx-auto px-6 py-10">
+
+      <!-- ── Stats Bar ──────────────────────────────────── -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div class="panel-border p-4">
+          <p class="type-label text-[0.6rem] text-charcoal/40">Total artículos</p>
+          <p class="type-mono text-2xl text-forest mt-1" id="stat-total">0</p>
+        </div>
+        <div class="panel-border p-4">
+          <p class="type-label text-[0.6rem] text-charcoal/40">Disponibles</p>
+          <p class="type-mono text-2xl text-forest mt-1" id="stat-available">0</p>
+        </div>
+        <div class="panel-border p-4">
+          <p class="type-label text-[0.6rem] text-charcoal/40">Vendidos</p>
+          <p class="type-mono text-2xl text-sold mt-1" id="stat-sold">0</p>
+        </div>
+        <div class="panel-border p-4">
+          <p class="type-label text-[0.6rem] text-charcoal/40">Categorías</p>
+          <p class="type-mono text-2xl text-forest mt-1" id="stat-categories">0</p>
+        </div>
+      </div>
+
+      <!-- ── Two-Column Layout ──────────────────────────── -->
+      <div class="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-8">
+
+        <!-- LEFT: Product Form -->
+        <div class="order-2 lg:order-1">
+          <div class="panel-border sticky top-24">
+            <div class="px-5 py-4 panel-border-b bg-sage/30">
+              <h2 class="type-label text-xs" id="form-title">Agregar artículo</h2>
+            </div>
+
+            <form id="product-form" class="p-5 flex flex-col gap-4">
+              <input type="hidden" id="form-product-id" value="" />
+
+              <div>
+                <label for="form-nombre" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Nombre</label>
+                <input
+                  id="form-nombre"
+                  type="text"
+                  required
+                  class="w-full px-3 py-2 text-sm bg-cream panel-border-light focus:border-forest outline-none transition-editorial"
+                  placeholder="Ej: Lámpara vintage de escritorio"
+                />
+              </div>
+
+              <div>
+                <label for="form-descripcion" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Descripción</label>
+                <textarea
+                  id="form-descripcion"
+                  rows="3"
+                  class="w-full px-3 py-2 text-sm bg-cream panel-border-light focus:border-forest outline-none transition-editorial"
+                  placeholder="Detalles sobre el estado, medidas, etc."
+                ></textarea>
+              </div>
+
+              <div>
+                <label for="form-categoria" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Categoría</label>
+                <select
+                  id="form-categoria"
+                  required
+                  class="w-full px-3 py-2 text-sm bg-cream panel-border-light focus:border-forest outline-none transition-editorial"
+                >
+                  <option value="" disabled selected>Seleccionar categoría…</option>
+                  <option value="Hogar">Hogar</option>
+                  <option value="Ropa">Ropa</option>
+                  <option value="Electrónica">Electrónica</option>
+                  <option value="Muebles">Muebles</option>
+                  <option value="Herramientas">Herramientas</option>
+                  <option value="Juguetes">Juguetes</option>
+                  <option value="Deportes">Deportes</option>
+                  <option value="Libros">Libros</option>
+                  <option value="Accesorios">Accesorios</option>
+                  <option value="Cocina">Cocina</option>
+                  <option value="Bebés">Bebés</option>
+                  <option value="Mascotas">Mascotas</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="form-precio" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Precio (MXN)</label>
+                <div class="relative">
+                  <span class="absolute left-3 top-1/2 -translate-y-1/2 type-mono text-sm text-charcoal/40">$</span>
+                  <input
+                    id="form-precio"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    required
+                    class="w-full pl-7 pr-3 py-2 text-sm bg-cream panel-border-light focus:border-forest outline-none transition-editorial type-mono"
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="form-estado" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Estado</label>
+                <select
+                  id="form-estado"
+                  class="w-full px-3 py-2 text-sm bg-cream panel-border-light focus:border-forest outline-none transition-editorial"
+                >
+                  <option value="disponible">Disponible</option>
+                  <option value="vendido">Vendido</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="form-imagen" class="type-label text-[0.6rem] text-charcoal/50 block mb-1">Imágenes</label>
+                <div class="panel-border-light p-3 bg-cream-dark/30">
+                  <input
+                    id="form-imagen"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    class="w-full text-xs text-charcoal/60 file:mr-3 file:px-3 file:py-1.5 file:border-0 file:bg-forest file:text-cream file:text-xs file:type-label file:cursor-pointer"
+                  />
+                  <!-- Gallery Previews -->
+                  <div id="gallery-preview" class="mt-4 grid grid-cols-3 gap-2 empty:hidden"></div>
+                  <p class="type-label text-[0.55rem] text-charcoal/40 mt-2 mt-4 text-center">
+                    Selecciona una imagen como principal usando el botón (★)
+                  </p>
+                </div>
+              </div>
+
+              <div id="form-error" class="text-xs text-red-700 hidden"></div>
+              <div id="form-success" class="text-xs text-forest hidden"></div>
+
+              <div class="flex gap-2 mt-2">
+                <button
+                  type="submit"
+                  id="form-submit-btn"
+                  class="flex-1 py-2.5 bg-forest text-cream type-label text-xs hover:bg-charcoal transition-editorial"
+                >
+                  Agregar
+                </button>
+                <button
+                  type="button"
+                  id="form-cancel-btn"
+                  class="px-4 py-2.5 panel-border type-label text-xs text-charcoal/50 hover:bg-charcoal hover:text-cream transition-editorial hidden"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT: Product List -->
+        <div class="order-1 lg:order-2">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="type-label text-xs text-charcoal/50">Inventario</h2>
+            <button
+              id="refresh-btn"
+              class="type-label text-[0.6rem] px-3 py-1 panel-border text-charcoal/40 hover:bg-forest hover:text-cream hover:border-forest transition-editorial"
+            >
+              Actualizar
+            </button>
+          </div>
+
+          <div id="admin-loading" class="py-12 text-center">
+            <p class="type-label text-xs text-charcoal/30">Cargando inventario…</p>
+          </div>
+
+          <div id="admin-empty" class="py-12 text-center hidden">
+            <p class="type-display-sm text-lg text-charcoal/20 italic">Sin artículos</p>
+            <p class="text-xs text-charcoal/30 mt-2">Usa el formulario para agregar tu primer producto.</p>
+          </div>
+
+          <div id="admin-product-list" class="hidden flex flex-col gap-3">
+            <!-- Product rows injected by JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<!-- ═══════════════════════════════════════════════════════
+     ADMIN CLIENT-SIDE JAVASCRIPT
+     ═══════════════════════════════════════════════════════ -->
+<script>
+  import { supabase } from '../lib/supabase';
+
+  let products = [];
+  let editingId = null;
+  let galleryItems = []; // Array of { id: string, file?: File, url?: string, isPrimary: boolean }
+
+  // DOM Elements
+  const loginScreen = document.getElementById('login-screen');
+  const adminDashboard = document.getElementById('admin-dashboard');
+  const loginForm = document.getElementById('login-form');
+  const loginEmail = document.getElementById('login-email');
+  const loginPassword = document.getElementById('login-password');
+  const loginError = document.getElementById('login-error');
+  const logoutBtn = document.getElementById('logout-btn');
+  const adminEmailDisplay = document.getElementById('admin-email');
+
+  const adminLoading = document.getElementById('admin-loading');
+  const adminEmpty = document.getElementById('admin-empty');
+  const adminProductList = document.getElementById('admin-product-list');
+  const refreshBtn = document.getElementById('refresh-btn');
+
+  const statTotal = document.getElementById('stat-total');
+  const statAvailable = document.getElementById('stat-available');
+  const statSold = document.getElementById('stat-sold');
+  const statCategories = document.getElementById('stat-categories');
+
+  const productForm = document.getElementById('product-form');
+  const formTitle = document.getElementById('form-title');
+  const formProductId = document.getElementById('form-product-id');
+  const formNombre = document.getElementById('form-nombre');
+  const formDescripcion = document.getElementById('form-descripcion');
+  const formCategoria = document.getElementById('form-categoria');
+  const formPrecio = document.getElementById('form-precio');
+  const formEstado = document.getElementById('form-estado');
+  
+  const formError = document.getElementById('form-error');
+  const formSuccess = document.getElementById('form-success');
+  const formSubmitBtn = document.getElementById('form-submit-btn');
+  const formCancelBtn = document.getElementById('form-cancel-btn');
+  
+  const formImagen = document.getElementById('form-imagen');
+  const galleryPreview = document.getElementById('gallery-preview');
+
+  // ── Auth & Login ─────────────────────────────────────────
+  async function checkAuth() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      showDashboard(session.user.email);
+    } else {
+      showLogin();
+    }
+  }
+
+  function showLogin() {
+    loginScreen.classList.remove('hidden');
+    adminDashboard.classList.add('hidden');
+  }
+
+  function showDashboard(email) {
+    loginScreen.classList.add('hidden');
+    adminDashboard.classList.remove('hidden');
+    adminEmailDisplay.textContent = email;
+    loadProducts();
+  }
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    loginError.classList.add('hidden');
+    
+    const email = loginEmail.value;
+    const password = loginPassword.value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      loginError.textContent = 'Credenciales inválidas. Intenta de nuevo.';
+      loginError.classList.remove('hidden');
+    } else {
+      showDashboard(data.user.email);
+    }
+  });
+
+  logoutBtn.addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    showLogin();
+  });
+
+  // ── Load Products ────────────────────────────────────────
+  async function loadProducts() {
+    adminLoading.classList.remove('hidden');
+    adminEmpty.classList.add('hidden');
+    adminProductList.classList.add('hidden');
+
+    const { data, error } = await supabase
+      .from('products')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    adminLoading.classList.add('hidden');
+
+    if (error) {
+      alert('Error cargando inventario: ' + error.message);
+      return;
+    }
+
+    products = data || [];
+    updateStats();
+
+    if (products.length === 0) {
+      adminEmpty.classList.remove('hidden');
+    } else {
+      renderAdminProducts();
+      adminProductList.classList.remove('hidden');
+    }
+  }
+
+  refreshBtn.addEventListener('click', loadProducts);
+
+  // ── Stats ────────────────────────────────────────────────
+  function updateStats() {
+    const available = products.filter(p => p.estado === 'disponible').length;
+    const sold = products.filter(p => p.estado === 'vendido').length;
+    const categories = new Set(products.map(p => p.categoria)).size;
+
+    statTotal.textContent = products.length;
+    statAvailable.textContent = available;
+    statSold.textContent = sold;
+    statCategories.textContent = categories;
+  }
+
+  // ── Render Admin Product Rows ────────────────────────────
+  function renderAdminProducts() {
+    adminProductList.innerHTML = products.map(product => {
+      const isSold = product.estado === 'vendido';
+      const priceFormatted = Number(product.precio).toLocaleString('es-MX', {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
+      });
+
+      return `
+        <div class="panel-border flex items-stretch gap-0 ${isSold ? 'opacity-60' : ''}" data-product-id="${product.id}">
+          <!-- Thumbnail -->
+          <div class="w-20 h-20 shrink-0 overflow-hidden border-r border-charcoal/10">
+            ${product.imagen_url
+              ? `<img src="${product.imagen_url}" alt="${product.nombre}" class="w-full h-full object-cover ${isSold ? 'grayscale' : ''}" />`
+              : `<div class="w-full h-full bg-sage/30 flex items-center justify-center">
+                  <span class="type-label text-[0.5rem] text-charcoal/20">N/A</span>
+                </div>`
+            }
+          </div>
+
+          <!-- Info -->
+          <div class="flex-1 px-4 py-2.5 flex flex-col justify-center min-w-0">
+            <div class="flex items-center gap-2">
+              <p class="text-sm font-medium truncate ${isSold ? 'line-through' : ''}">${product.nombre}</p>
+              <span class="type-label text-[0.55rem] px-1.5 py-0.5 shrink-0 ${isSold ? 'badge-vendido' : 'badge-disponible'}">
+                ${isSold ? 'Vendido' : 'Disponible'}
+              </span>
+            </div>
+            <div class="flex items-center gap-3 mt-0.5">
+              <span class="type-mono text-xs text-forest">\$${priceFormatted} MXN</span>
+              <span class="type-label text-[0.55rem] text-charcoal/40">${product.categoria}</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex items-center gap-1 px-3 shrink-0">
+            <button
+              class="admin-action-btn admin-edit-btn type-label text-[0.6rem] px-2.5 py-1.5 panel-border-light hover:bg-forest hover:text-cream hover:border-forest transition-editorial"
+              data-action="edit"
+              data-id="${product.id}"
+              title="Editar"
+            >
+              Editar
+            </button>
+            <button
+              class="admin-action-btn admin-toggle-btn type-label text-[0.6rem] px-2.5 py-1.5 panel-border-light hover:bg-sold hover:text-cream hover:border-sold transition-editorial"
+              data-action="toggle"
+              data-id="${product.id}"
+              title="${isSold ? 'Marcar como disponible' : 'Marcar como vendido'}"
+            >
+              ${isSold ? 'Reactivar' : 'Vendido'}
+            </button>
+            <button
+              class="admin-action-btn admin-delete-btn type-label text-[0.6rem] px-2.5 py-1.5 panel-border-light text-red-700/60 hover:bg-red-700 hover:text-cream hover:border-red-700 transition-editorial"
+              data-action="delete"
+              data-id="${product.id}"
+              title="Eliminar"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Attach event listeners
+    adminProductList.querySelectorAll('.admin-action-btn').forEach(btn => {
+      btn.addEventListener('click', handleAction);
+    });
+  }
+
+  // ── Action Handler ───────────────────────────────────────
+  async function handleAction(e) {
+    const action = e.currentTarget.dataset.action;
+    const id = e.currentTarget.dataset.id;
+    const product = products.find(p => p.id === id);
+
+    if (!product) return;
+
+    if (action === 'edit') {
+      startEditing(product);
+    } else if (action === 'toggle') {
+      await toggleStatus(product);
+    } else if (action === 'delete') {
+      await deleteProduct(product);
+    }
+  }
+
+  // ── Edit Mode ────────────────────────────────────────────
+  function startEditing(product) {
+    editingId = product.id;
+    formTitle.textContent = 'Editar artículo';
+    formSubmitBtn.textContent = 'Guardar cambios';
+    formCancelBtn.classList.remove('hidden');
+
+    formProductId.value = product.id;
+    formNombre.value = product.nombre;
+    formDescripcion.value = product.descripcion || '';
+    formCategoria.value = product.categoria;
+    formPrecio.value = product.precio;
+    formEstado.value = product.estado;
+
+    // Load gallery
+    galleryItems = [];
+    if (product.imagen_url) {
+      galleryItems.push({ id: Math.random().toString(36).substring(7), url: product.imagen_url, isPrimary: true });
+    }
+    if (product.galeria && product.galeria.length > 0) {
+      product.galeria.forEach(url => {
+        galleryItems.push({ id: Math.random().toString(36).substring(7), url, isPrimary: false });
+      });
+    }
+    renderGalleryPreview();
+
+    // Scroll form into view
+    formTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function cancelEditing() {
+    editingId = null;
+    formTitle.textContent = 'Agregar artículo';
+    formSubmitBtn.textContent = 'Agregar';
+    formCancelBtn.classList.add('hidden');
+    productForm.reset();
+    formProductId.value = '';
+    
+    galleryItems = [];
+    renderGalleryPreview();
+    formImagen.value = '';
+
+    formError.classList.add('hidden');
+    formSuccess.classList.add('hidden');
+  }
+
+  formCancelBtn.addEventListener('click', cancelEditing);
+
+  // ── Toggle Status ────────────────────────────────────────
+  async function toggleStatus(product) {
+    const newEstado = product.estado === 'disponible' ? 'vendido' : 'disponible';
+    const { error } = await supabase.from('products').update({ estado: newEstado }).eq('id', product.id);
+    if (error) alert('Error: ' + error.message);
+    else await loadProducts();
+  }
+
+  // ── Delete Product ───────────────────────────────────────
+  async function deleteProduct(product) {
+    const confirmed = window.confirm(`¿Eliminar "${product.nombre}"? Esta acción no se puede deshacer.`);
+    if (!confirmed) return;
+
+    // Collect all URLs to delete from storage
+    const urlsToDelete = [];
+    if (product.imagen_url) urlsToDelete.push(product.imagen_url);
+    if (product.galeria) urlsToDelete.push(...product.galeria);
+
+    // Try to remove from storage (don't block if it fails, sometimes files are already gone)
+    const paths = urlsToDelete.map(url => {
+      const parts = url.split('/product-images/');
+      return parts.length > 1 ? decodeURIComponent(parts[1]) : null;
+    }).filter(Boolean);
+
+    if (paths.length > 0) {
+      await supabase.storage.from('product-images').remove(paths);
+    }
+
+    const { error } = await supabase.from('products').delete().eq('id', product.id);
+    if (error) alert('Error: ' + error.message);
+    else {
+      if (editingId === product.id) cancelEditing();
+      await loadProducts();
+    }
+  }
+
+  // ── Gallery Preview Logic ─────────────────────────────────
+  function renderGalleryPreview() {
+    galleryPreview.innerHTML = galleryItems.map((item, idx) => {
+      const src = item.url ? item.url : URL.createObjectURL(item.file);
+      return `
+        <div class="relative group border ${item.isPrimary ? 'border-forest' : 'border-charcoal/20'} rounded overflow-hidden aspect-square">
+          <img src="${src}" class="w-full h-full object-cover" />
+          
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+            <button type="button" class="set-primary-btn w-6 h-6 bg-white text-forest rounded-full flex items-center justify-center text-xs" data-id="${item.id}" title="Hacer principal">
+              ${item.isPrimary ? '★' : '☆'}
+            </button>
+            <button type="button" class="remove-img-btn w-6 h-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs" data-id="${item.id}" title="Eliminar">
+              ×
+            </button>
+          </div>
+          
+          ${item.isPrimary ? '<div class="absolute top-1 left-1 bg-forest text-cream type-label text-[0.4rem] px-1 py-0.5 rounded">Principal</div>' : ''}
+        </div>
+      `;
+    }).join('');
+
+    // Attach listeners
+    galleryPreview.querySelectorAll('.set-primary-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        galleryItems.forEach(i => i.isPrimary = (i.id === id));
+        renderGalleryPreview();
+      });
+    });
+
+    galleryPreview.querySelectorAll('.remove-img-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = e.currentTarget.dataset.id;
+        galleryItems = galleryItems.filter(i => i.id !== id);
+        if (galleryItems.length > 0 && !galleryItems.some(i => i.isPrimary)) {
+          galleryItems[0].isPrimary = true; // ensure one is primary
+        }
+        renderGalleryPreview();
+      });
+    });
+  }
+
+  formImagen.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    files.forEach(file => {
+      galleryItems.push({
+        id: Math.random().toString(36).substring(7),
+        file,
+        isPrimary: galleryItems.length === 0 // First image is primary by default
+      });
+    });
+    renderGalleryPreview();
+    formImagen.value = ''; // Reset input so we can add more files
+  });
+
+  // ── Upload Image to Storage ──────────────────────────────
+  async function uploadImage(file) {
+    const ext = file.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+
+    const { data, error } = await supabase.storage
+      .from('product-images')
+      .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+    if (error) throw error;
+    const { data: urlData } = supabase.storage.from('product-images').getPublicUrl(data.path);
+    return urlData.publicUrl;
+  }
+
+  // ── Form Submit (Add / Edit) ─────────────────────────────
+  productForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    formError.classList.add('hidden');
+    formSuccess.classList.add('hidden');
+    formSubmitBtn.disabled = true;
+    formSubmitBtn.textContent = editingId ? 'Guardando…' : 'Agregando…';
+
+    try {
+      const nombre = formNombre.value.trim();
+      const descripcion = formDescripcion.value.trim();
+      const categoria = formCategoria.value.trim();
+      const precio = parseFloat(formPrecio.value);
+      const estado = formEstado.value;
+
+      if (!nombre || !categoria || isNaN(precio)) {
+        throw new Error('Completa todos los campos obligatorios.');
+      }
+
+      // 1. Upload new files first and update galleryItems URLs
+      for (const item of galleryItems) {
+        if (item.file && !item.url) {
+          item.url = await uploadImage(item.file);
+        }
+      }
+
+      // 2. Separate primary vs gallery
+      const primaryItem = galleryItems.find(i => i.isPrimary) || galleryItems[0];
+      const imagen_url = primaryItem ? primaryItem.url : null;
+      const galeria = galleryItems.filter(i => i !== primaryItem).map(i => i.url);
+
+      const dbData = { nombre, descripcion, categoria, precio, estado, imagen_url, galeria };
+
+      if (editingId) {
+        const { error } = await supabase.from('products').update(dbData).eq('id', editingId);
+        if (error) throw error;
+        formSuccess.textContent = '✓ Artículo actualizado correctamente.';
+      } else {
+        const { error } = await supabase.from('products').insert(dbData);
+        if (error) throw error;
+        formSuccess.textContent = '✓ Artículo agregado al catálogo.';
+      }
+
+      formSuccess.classList.remove('hidden');
+      cancelEditing();
+      await loadProducts();
+    } catch (err) {
+      formError.textContent = err.message;
+      formError.classList.remove('hidden');
+    } finally {
+      formSubmitBtn.disabled = false;
+      formSubmitBtn.textContent = editingId ? 'Guardar cambios' : 'Agregar';
+    }
+  });
+
+  // ── Init ─────────────────────────────────────────────────
+  checkAuth();
+</script>
+
+<!-- ═══════════════════════════════════════════════════════
+     ADMIN-SPECIFIC STYLES
+     ═══════════════════════════════════════════════════════ -->
+<style is:global>
+  /* Override file input styling */
+  input[type="file"]::-webkit-file-upload-button {
+    cursor: pointer;
+  }
+
+  /* Admin action button sizing */
+  .admin-action-btn {
+    white-space: nowrap;
+  }
+
+  /* Responsive admin product rows */
+  @media (max-width: 640px) {
+    .admin-action-btn {
+      font-size: 0.55rem;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+</style>
