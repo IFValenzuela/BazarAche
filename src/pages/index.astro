@@ -43,40 +43,38 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </header>
 
   <!-- ═══════════════════════════════════════════════════════
-       2. COHESIVE FULL-BLEED HERO
+       2. COHESIVE FULL-BLEED HERO (ORIGINAL ARTWORK)
        ═══════════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden bg-hero-bg text-cream">
-    <!-- Background image: chair logo shifted to the right on mobile so text is 100% clear on left -->
+    <!-- Original artwork with adjusted vertical positioning so the logo is lifted and never cropped -->
     <div 
-      class="absolute inset-0 z-0 bg-cover bg-[position:0%_center] md:bg-center"
-      style="background-image: url('/BazarAche.png');"
+      class="absolute inset-0 z-0 bg-cover bg-[position:0%_center] md:bg-[position:center_60%]"
+      style="background-image: url('/BazarHeroHero_2560x1440.png?v=3');"
     ></div>
 
-    <!-- Dark gradient overlay on mobile to guarantee crystal clear typography on left -->
-    <div class="md:hidden absolute inset-0 z-0 bg-gradient-to-r from-hero-bg/95 via-hero-bg/70 to-transparent"></div>
-
-    <!-- Desktop Grid (md and up) -->
-    <div class="hidden md:grid relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-24 grid-cols-[1fr_auto_1fr] gap-10 items-end min-h-[480px]">
+    <!-- Desktop Grid (3-column layout keeping center clear for original logo) -->
+    <div class="hidden md:grid relative z-10 max-w-7xl mx-auto px-6 py-16 lg:py-20 grid-cols-[1fr_auto_1fr] gap-8 items-end min-h-[480px]">
+      
       <!-- Left: Eyebrow + Headline -->
       <div class="space-y-4 max-w-sm">
-        <span class="block text-xs font-mono uppercase tracking-[0.25em] text-warm-gold drop-shadow-sm">
+        <span class="block text-xs font-mono uppercase tracking-[0.25em] text-warm-gold">
           Nuevos y Seminuevos en Mexicali
         </span>
-        <h1 class="type-display text-5xl lg:text-6xl xl:text-7xl text-cream leading-[1.05] tracking-tight drop-shadow-md">
+        <h1 class="type-display text-5xl lg:text-6xl xl:text-7xl text-cream leading-[1.05] tracking-tight">
           Artículos <br>
           únicos <br>
           <span class="italic text-ochre">en Mexicali</span>
         </h1>
       </div>
 
-      <!-- Center spacer for chair logo -->
+      <!-- Center spacer to showcase the original chair logo with zero interference -->
       <div class="w-48 lg:w-64"></div>
 
       <!-- Right: "Cómo Funciona" Quick Panel -->
       <div class="flex justify-end">
         <a 
           href="#como-funciona" 
-          class="block bg-black/40 hover:bg-black/50 backdrop-blur-md rounded-2xl p-5 border border-white/10 hover:border-white/20 text-cream/80 space-y-3 max-w-xs transition-all hover:scale-[1.02] cursor-pointer group shadow-2xl"
+          class="block bg-black/40 hover:bg-black/50 backdrop-blur-md rounded-2xl p-5 border border-white/10 hover:border-white/20 text-cream/80 space-y-3 max-w-xs transition-all hover:scale-[1.02] cursor-pointer group shadow-xl"
           title="Ver instrucciones detalladas abajo"
         >
           <div class="flex items-center justify-between">
@@ -105,20 +103,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
 
-    <!-- Mobile Hero Layout (clean, full-bleed, high-end editorial) -->
+    <!-- Mobile Hero Layout (clean, high-end editorial) -->
     <div class="md:hidden relative z-10 px-5 pt-14 pb-12 flex flex-col justify-end min-h-[340px] text-left space-y-4">
       <div class="space-y-2 max-w-[240px]">
-        <span class="block text-[10px] font-mono uppercase tracking-[0.2em] text-warm-gold drop-shadow-sm">
+        <span class="block text-[10px] font-mono uppercase tracking-[0.2em] text-warm-gold">
           Nuevos y Seminuevos en Mexicali
         </span>
-        <h1 class="type-display text-4xl text-cream leading-[1.08] tracking-tight drop-shadow-md">
+        <h1 class="type-display text-4xl text-cream leading-[1.08] tracking-tight">
           Artículos <br>
           únicos <br>
           <span class="italic text-ochre">en Mexicali</span>
         </h1>
       </div>
 
-      <!-- Clean editorial link (no bubble/pill) -->
+      <!-- Clean editorial link -->
       <div class="pt-2">
         <a 
           href="#como-funciona" 
