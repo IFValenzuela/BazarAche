@@ -36,14 +36,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </header>
 
   <!-- ═══════════════════════════════════════════════════════
-       2. RESPONSIVE HERO
+       2. COHESIVE FULL-BLEED HERO
        ═══════════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden bg-hero-bg text-cream">
-    <!-- Desktop background image (md and up) -->
+    <!-- Background image: full bleed edge-to-edge on both mobile & desktop -->
     <div 
-      class="hidden md:block absolute inset-0 z-0 bg-cover bg-center"
+      class="absolute inset-0 z-0 bg-cover bg-[center_right_25%] md:bg-center"
       style="background-image: url('/BazarAche.png');"
     ></div>
+
+    <!-- Subtle gradient overlay on mobile to guarantee typography contrast -->
+    <div class="md:hidden absolute inset-0 z-0 bg-gradient-to-r from-hero-bg/95 via-hero-bg/75 to-transparent"></div>
 
     <!-- Desktop Grid (md and up) -->
     <div class="hidden md:grid relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-24 grid-cols-[1fr_auto_1fr] gap-10 items-end min-h-[480px]">
@@ -95,36 +98,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
 
-    <!-- Mobile Hero (clean vertical flow, no overlapping text!) -->
-    <div class="md:hidden relative z-10 px-5 pt-8 pb-10 flex flex-col items-center text-center space-y-5">
-      <!-- Chair illustration centered -->
-      <div class="w-28 sm:w-36 aspect-[3/4] flex items-center justify-center">
-        <img 
-          src="/BazarAche.png" 
-          alt="Bazar Ache Logo" 
-          class="w-full h-full object-contain drop-shadow-xl"
-        />
-      </div>
-
-      <!-- Headline -->
-      <div class="space-y-2">
-        <span class="block text-[10px] font-mono uppercase tracking-[0.2em] text-warm-gold">
+    <!-- Mobile Hero Layout (clean, full-bleed, high-end editorial) -->
+    <div class="md:hidden relative z-10 px-5 pt-14 pb-12 flex flex-col justify-end min-h-[340px] text-left space-y-4">
+      <div class="space-y-2 max-w-[280px]">
+        <span class="block text-[10px] font-mono uppercase tracking-[0.2em] text-warm-gold drop-shadow-sm">
           Nuevos y Seminuevos en Mexicali
         </span>
-        <h1 class="type-display text-3xl sm:text-4xl text-cream leading-[1.1] tracking-tight">
-          Artículos únicos <br>
+        <h1 class="type-display text-4xl text-cream leading-[1.08] tracking-tight drop-shadow-md">
+          Artículos <br>
+          únicos <br>
           <span class="italic text-ochre">en Mexicali</span>
         </h1>
       </div>
 
-      <!-- Quick Jump Button -->
-      <a 
-        href="#como-funciona" 
-        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-mono tracking-wider uppercase bg-white/10 hover:bg-white/20 border border-white/15 text-cream/90 transition-all"
-      >
-        <span>¿Cómo funciona?</span>
-        <span class="text-ochre">↓</span>
-      </a>
+      <!-- Clean editorial link (no bubble/pill) -->
+      <div class="pt-2">
+        <a 
+          href="#como-funciona" 
+          class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-cream/70 hover:text-ochre transition-editorial"
+        >
+          <span>¿Cómo funciona?</span>
+          <span class="text-ochre">↓</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -133,13 +129,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
        ═══════════════════════════════════════════════════════ -->
   <nav id="catalogo" class="sticky top-14 sm:top-16 md:top-20 z-40 bg-cream/95 backdrop-blur-sm border-b border-panel-border py-2.5 sm:py-3.5 scroll-mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
-      <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto py-0.5" style="scrollbar-width: none; -ms-overflow-style: none;">
-        <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-charcoal/40 shrink-0 mr-0.5">Filtrar:</span>
-        <div id="filter-bar" class="flex items-center gap-1.5 sm:gap-2">
+      
+      <!-- Scrollable filter tags -->
+      <div class="flex items-center gap-2 flex-1 min-w-0 overflow-x-auto py-0.5 pr-2" style="scrollbar-width: none; -ms-overflow-style: none;">
+        <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-charcoal/40 shrink-0">Filtrar:</span>
+        <div id="filter-bar" class="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <!-- Filters injected by JS -->
         </div>
       </div>
-      <div class="text-[11px] sm:text-xs font-mono text-charcoal/50 shrink-0 whitespace-nowrap pl-1" id="product-count"></div>
+
+      <!-- Item Counter (Pinned securely on right with hairline divider) -->
+      <div class="shrink-0 pl-3 border-l border-card-border/70">
+        <span class="text-[11px] sm:text-xs font-mono text-charcoal/50 whitespace-nowrap" id="product-count"></span>
+      </div>
+
     </div>
   </nav>
 
