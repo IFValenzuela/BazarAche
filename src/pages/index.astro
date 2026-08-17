@@ -46,10 +46,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
        2. COHESIVE FULL-BLEED HERO (ORIGINAL ARTWORK)
        ═══════════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden bg-hero-bg text-cream">
-    <!-- Original artwork with adjusted vertical positioning so the logo is lifted and never cropped -->
+    <!-- Original artwork: enlarged on mobile (auto 145%) so the logo appears bigger and prominent -->
     <div 
-      class="absolute inset-0 z-0 bg-cover bg-[position:0%_center] md:bg-[position:center_60%]"
-      style="background-image: url('/BazarHeroHero_2560x1440.png?v=3');"
+      class="absolute inset-0 z-0 bg-no-repeat bg-[size:auto_155%] bg-[position:32%_center] md:bg-cover md:bg-[position:center_60%]"
+      style="background-image: url('/BazarHeroHero_2560x1440.png?v=4');"
     ></div>
 
     <!-- Desktop Grid (3-column layout keeping center clear for original logo) -->
