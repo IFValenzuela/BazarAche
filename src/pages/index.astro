@@ -10,8 +10,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm panel-border-b">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 md:h-20 flex items-center justify-between">
       <!-- Brand -->
-      <a href="/" class="type-display text-2xl sm:text-3xl text-charcoal tracking-tight hover:opacity-80 transition-editorial shrink-0">
-        Bazar Ache
+      <a href="/" class="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+        <img 
+          src="/favicon.png" 
+          alt="Bazar Ache Logo" 
+          class="h-7 w-auto sm:h-8.5 object-contain group-hover:scale-105 transition-all"
+        />
+        <span class="type-display text-2xl sm:text-3xl text-charcoal tracking-tight group-hover:opacity-80 transition-editorial">
+          Bazar Ache
+        </span>
       </a>
 
       <!-- Center Nav (Desktop) -->
