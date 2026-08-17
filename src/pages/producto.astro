@@ -5,12 +5,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Detalle del Artículo | Bazar Ache">
   <!-- Navbar -->
   <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm panel-border-b">
-    <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between gap-6">
-      <a href="/" class="type-display text-2xl md:text-3xl text-charcoal hover:opacity-80 transition-editorial shrink-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 md:h-20 flex items-center justify-between gap-4">
+      <a href="/" class="type-display text-2xl sm:text-3xl text-charcoal hover:opacity-80 transition-editorial shrink-0">
         Bazar Ache
       </a>
-      <a href="/" class="text-xs font-mono uppercase tracking-wider text-charcoal/50 hover:text-charcoal transition-editorial">
-        ← Volver al catálogo
+      <a href="/" class="text-[11px] sm:text-xs font-mono uppercase tracking-wider text-charcoal/50 hover:text-charcoal transition-editorial shrink-0">
+        ← <span class="hidden sm:inline">Volver al </span>catálogo
       </a>
     </div>
   </header>
@@ -21,17 +21,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <!-- Error State -->
-  <div id="error-state" class="py-24 text-center hidden">
+  <div id="error-state" class="py-24 text-center hidden px-6">
     <p class="type-display-sm text-2xl text-charcoal mb-4">Artículo no encontrado</p>
     <a href="/" class="type-label text-xs text-ochre hover:opacity-80 underline underline-offset-4">Volver al catálogo</a>
   </div>
 
   <!-- Product Container -->
-  <main id="product-container" class="hidden max-w-[1200px] mx-auto px-6 py-12 md:py-20">
-    <div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.5fr_1fr] gap-12 lg:gap-20">
+  <main id="product-container" class="hidden max-w-[1200px] mx-auto px-4 sm:px-6 py-6 sm:py-12 md:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-[1.2fr_1fr] lg:grid-cols-[1.5fr_1fr] gap-8 md:gap-12 lg:gap-20">
       
       <!-- Left: Photo Gallery -->
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-3 sm:gap-4">
         <!-- Main Image -->
         <div class="aspect-4/3 md:aspect-square bg-cream-dark rounded-2xl border border-card-border overflow-hidden relative group select-none">
           <img id="main-image" src="" alt="Imagen principal" class="w-full h-full object-cover transition-all duration-300" />
@@ -41,9 +41,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             id="prev-image-btn" 
             type="button"
             aria-label="Foto anterior"
-            class="hidden absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-charcoal shadow-md backdrop-blur-sm flex items-center justify-center transition-all opacity-85 hover:opacity-100 hover:scale-105 active:scale-95 z-10 cursor-pointer"
+            class="hidden absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-charcoal shadow-md backdrop-blur-sm flex items-center justify-center transition-all opacity-85 hover:opacity-100 hover:scale-105 active:scale-95 z-10 cursor-pointer"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 -translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 -translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
@@ -53,9 +53,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             id="next-image-btn" 
             type="button"
             aria-label="Siguiente foto"
-            class="hidden absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-charcoal shadow-md backdrop-blur-sm flex items-center justify-center transition-all opacity-85 hover:opacity-100 hover:scale-105 active:scale-95 z-10 cursor-pointer"
+            class="hidden absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/90 hover:bg-white text-charcoal shadow-md backdrop-blur-sm flex items-center justify-center transition-all opacity-85 hover:opacity-100 hover:scale-105 active:scale-95 z-10 cursor-pointer"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -66,50 +66,50 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div id="sold-badge-large" class="absolute inset-0 flex items-center justify-center hidden z-20">
-            <span class="type-label text-lg md:text-xl px-6 py-3 bg-charcoal/80 text-cream tracking-widest backdrop-blur-sm rounded-xl">
+            <span class="type-label text-base sm:text-lg md:text-xl px-5 py-2.5 bg-charcoal/80 text-cream tracking-widest backdrop-blur-sm rounded-xl">
               Vendido
             </span>
           </div>
         </div>
 
         <!-- Thumbnails -->
-        <div id="thumbnails-container" class="flex gap-3 overflow-x-auto pb-2 empty:hidden">
+        <div id="thumbnails-container" class="flex gap-2.5 sm:gap-3 overflow-x-auto pb-2 empty:hidden" style="scrollbar-width: none; -ms-overflow-style: none;">
           <!-- Injected via JS -->
         </div>
       </div>
 
       <!-- Right: Details -->
-      <div class="flex flex-col pt-2 md:pt-6">
-        <div class="flex items-center gap-3 mb-6">
+      <div class="flex flex-col pt-0 md:pt-4">
+        <div class="flex items-center gap-2.5 mb-4 sm:mb-6">
           <span id="badge-category" class="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 rounded-md bg-white border border-card-border text-charcoal">
             Categoría
           </span>
-          <span id="badge-status" class="type-label text-[0.65rem] px-3 py-1.5 rounded-md">
-            Estado
+          <span id="badge-status" class="hidden type-label text-[0.65rem] px-2.5 py-1 rounded-md badge-vendido">
+            Vendido
           </span>
         </div>
 
-        <h1 id="product-title" class="type-display text-4xl md:text-5xl lg:text-6xl text-charcoal leading-tight mb-4">
+        <h1 id="product-title" class="type-display text-2xl sm:text-4xl md:text-5xl text-charcoal leading-snug mb-3">
           Cargando…
         </h1>
 
-        <p id="product-price" class="type-mono text-2xl md:text-3xl font-bold text-charcoal mb-8">
+        <p id="product-price" class="type-mono text-xl sm:text-2xl md:text-3xl font-bold text-charcoal mb-6">
           $0.00
         </p>
 
-        <div class="w-12 h-[1px] bg-card-border mb-8"></div>
+        <div class="w-12 h-[1px] bg-card-border mb-6"></div>
 
-        <div class="prose prose-sm prose-p:text-charcoal/70 prose-p:leading-relaxed mb-10">
-          <p id="product-description" class="whitespace-pre-line">
+        <div class="prose prose-sm prose-p:text-charcoal/70 prose-p:leading-relaxed mb-8">
+          <p id="product-description" class="whitespace-pre-line text-xs sm:text-sm">
             Cargando descripción...
           </p>
         </div>
 
-        <div id="action-container" class="mt-auto pt-8">
+        <div id="action-container" class="mt-auto pt-4 sm:pt-6">
           <!-- WhatsApp button injected here -->
         </div>
         
-        <p class="type-label text-[0.6rem] text-charcoal/40 mt-6 text-center md:text-left">
+        <p class="type-label text-[0.6rem] text-charcoal/40 mt-4 text-center md:text-left">
           El pago y la entrega se coordinan directamente.
         </p>
       </div>
@@ -120,8 +120,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ═══════════════════════════════════════════════════════
        COMPACT BRANDED FOOTER
        ═══════════════════════════════════════════════════════ -->
-  <footer class="mt-16 bg-hero-bg text-cream/90 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
+  <footer class="mt-12 sm:mt-16 bg-hero-bg text-cream/90 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
       
       <!-- Brand & Location -->
       <div class="flex items-center gap-3">
@@ -133,13 +133,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Navigation Links -->
-      <nav class="flex items-center gap-8 text-xs font-mono tracking-wider uppercase text-cream/60">
+      <nav class="flex items-center gap-6 sm:gap-8 text-xs font-mono tracking-wider uppercase text-cream/60">
         <a href="/#catalogo" class="hover:text-cream transition-editorial">Catálogo</a>
         <a href="/#como-funciona" class="hover:text-cream transition-editorial">Cómo Funciona</a>
       </nav>
 
       <!-- Phone, WhatsApp & Copyright -->
-      <div class="flex flex-wrap items-center justify-center md:justify-end gap-5 text-xs font-mono text-cream/60">
+      <div class="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-3 sm:gap-5 text-xs font-mono text-cream/60 text-center">
         <a
           href="https://wa.me/526861868611"
           target="_blank"
@@ -255,8 +255,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     productDescription.textContent = product.descripcion || 'Sin descripción adicional.';
     badgeCategory.textContent = product.categoria;
 
-    badgeStatus.textContent = isSold ? 'Vendido' : 'Disponible';
-    badgeStatus.className = `type-label text-[0.65rem] px-3 py-1.5 rounded-md shadow-sm ${isSold ? 'badge-vendido' : 'badge-disponible'}`;
+    if (isSold) {
+      badgeStatus.textContent = 'Vendido';
+      badgeStatus.className = 'type-label text-[0.65rem] px-2.5 py-1 rounded-md shadow-sm badge-vendido inline-block';
+      badgeStatus.classList.remove('hidden');
+    } else {
+      badgeStatus.classList.add('hidden');
+    }
 
     // Action Button
     if (isSold) {

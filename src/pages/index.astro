@@ -5,19 +5,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="Bazar Ache — Catálogo" description="Encuentra artículos únicos y de segunda mano en Mexicali. Compra fácil por WhatsApp.">
 
   <!-- ═══════════════════════════════════════════════════════
-       1. MINIMAL HEADER
-       ═══════════════════════════════════════════════════════ -->
-  <!-- ═══════════════════════════════════════════════════════
        1. MINIMAL HEADER (STICKY)
        ═══════════════════════════════════════════════════════ -->
   <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm panel-border-b">
-    <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 md:h-20 flex items-center justify-between">
       <!-- Brand -->
-      <a href="/" class="type-display text-2xl md:text-3xl text-charcoal tracking-tight hover:opacity-80 transition-editorial shrink-0">
+      <a href="/" class="type-display text-2xl sm:text-3xl text-charcoal tracking-tight hover:opacity-80 transition-editorial shrink-0">
         Bazar Ache
       </a>
 
-      <!-- Center Nav -->
+      <!-- Center Nav (Desktop) -->
       <nav class="hidden md:flex items-center gap-10 text-xs uppercase tracking-widest font-mono text-charcoal/50">
         <a href="#catalogo" class="text-charcoal font-bold">Catálogo</a>
         <a href="#como-funciona" class="hover:text-charcoal transition-editorial">Cómo Funciona</a>
@@ -28,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         href="https://wa.me/526861868611"
         target="_blank"
         rel="noopener noreferrer"
-        class="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono tracking-widest uppercase border border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-cream active:scale-95 transition-all"
+        class="shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-mono tracking-widest uppercase border border-charcoal/30 text-charcoal hover:bg-charcoal hover:text-cream active:scale-95 transition-all"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
@@ -39,39 +36,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </header>
 
   <!-- ═══════════════════════════════════════════════════════
-       2. FULL-BLEED HERO — Chair artwork as background
+       2. RESPONSIVE HERO
        ═══════════════════════════════════════════════════════ -->
-  <section class="relative overflow-hidden bg-hero-bg">
-    <!-- Background image: full-bleed cover -->
+  <section class="relative overflow-hidden bg-hero-bg text-cream">
+    <!-- Desktop background image (md and up) -->
     <div 
-      class="absolute inset-0 z-0 bg-cover bg-center"
+      class="hidden md:block absolute inset-0 z-0 bg-cover bg-center"
       style="background-image: url('/BazarAche.png');"
     ></div>
 
-    <!-- Content: 3-column grid — text left, logo center (clear), panel right -->
-    <div class="relative z-10 max-w-7xl mx-auto px-6 py-16 md:py-20 lg:py-24 grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-10 items-end min-h-[420px] md:min-h-[480px]">
-      
+    <!-- Desktop Grid (md and up) -->
+    <div class="hidden md:grid relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-24 grid-cols-[1fr_auto_1fr] gap-10 items-end min-h-[480px]">
       <!-- Left: Eyebrow + Headline -->
-      <div class="space-y-4 md:max-w-sm">
+      <div class="space-y-4 max-w-sm">
         <span class="block text-xs font-mono uppercase tracking-[0.25em] text-warm-gold drop-shadow-sm">
           Nuevos y Seminuevos en Mexicali
         </span>
-        <h1 class="type-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-cream leading-[1.05] tracking-tight drop-shadow-md">
+        <h1 class="type-display text-5xl lg:text-6xl xl:text-7xl text-cream leading-[1.05] tracking-tight drop-shadow-md">
           Artículos <br>
           únicos <br>
           <span class="italic text-ochre">en Mexicali</span>
         </h1>
       </div>
 
-      <!-- Center: spacer to keep the logo area clear -->
-      <div class="hidden md:block w-48 lg:w-64"></div>
+      <!-- Center spacer for chair logo -->
+      <div class="w-48 lg:w-64"></div>
 
-      <!-- Right: "Cómo Funciona" Frosted Glass Panel -->
-      <div id="como-funciona" class="hidden md:flex md:justify-end">
-        <div class="bg-black/40 backdrop-blur-md rounded-2xl p-5 border border-white/10 text-cream/80 space-y-3 max-w-xs">
-          <p class="text-[11px] font-mono uppercase tracking-widest text-warm-gold font-semibold">
-            Cómo funciona
-          </p>
+      <!-- Right: "Cómo Funciona" Quick Panel -->
+      <div class="flex justify-end">
+        <a 
+          href="#como-funciona" 
+          class="block bg-black/40 hover:bg-black/50 backdrop-blur-md rounded-2xl p-5 border border-white/10 hover:border-white/20 text-cream/80 space-y-3 max-w-xs transition-all hover:scale-[1.02] cursor-pointer group shadow-2xl"
+          title="Ver instrucciones detalladas abajo"
+        >
+          <div class="flex items-center justify-between">
+            <p class="text-[11px] font-mono uppercase tracking-widest text-warm-gold font-semibold">
+              Cómo funciona
+            </p>
+            <span class="text-[10px] font-mono text-cream/40 group-hover:text-ochre transition-editorial">
+              Ver más ↓
+            </span>
+          </div>
           <ul class="space-y-3 text-xs leading-relaxed font-sans">
             <li class="flex items-start gap-3">
               <span class="font-mono text-ochre font-bold text-xs shrink-0">01</span>
@@ -86,31 +91,62 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span>Coordina el pago y entrega directamente.</span>
             </li>
           </ul>
-        </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Hero (clean vertical flow, no overlapping text!) -->
+    <div class="md:hidden relative z-10 px-5 pt-8 pb-10 flex flex-col items-center text-center space-y-5">
+      <!-- Chair illustration centered -->
+      <div class="w-28 sm:w-36 aspect-[3/4] flex items-center justify-center">
+        <img 
+          src="/BazarAche.png" 
+          alt="Bazar Ache Logo" 
+          class="w-full h-full object-contain drop-shadow-xl"
+        />
       </div>
 
+      <!-- Headline -->
+      <div class="space-y-2">
+        <span class="block text-[10px] font-mono uppercase tracking-[0.2em] text-warm-gold">
+          Nuevos y Seminuevos en Mexicali
+        </span>
+        <h1 class="type-display text-3xl sm:text-4xl text-cream leading-[1.1] tracking-tight">
+          Artículos únicos <br>
+          <span class="italic text-ochre">en Mexicali</span>
+        </h1>
+      </div>
+
+      <!-- Quick Jump Button -->
+      <a 
+        href="#como-funciona" 
+        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-mono tracking-wider uppercase bg-white/10 hover:bg-white/20 border border-white/15 text-cream/90 transition-all"
+      >
+        <span>¿Cómo funciona?</span>
+        <span class="text-ochre">↓</span>
+      </a>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
        3. INTEGRATED STICKY FILTER BAR
        ═══════════════════════════════════════════════════════ -->
-  <nav id="catalogo" class="sticky top-16 md:top-20 z-40 bg-cream/95 backdrop-blur-sm border-b border-panel-border py-3.5">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3 overflow-x-auto">
-        <span class="text-[11px] font-mono uppercase tracking-widest text-charcoal/40 shrink-0 mr-1">Filtrar:</span>
-        <div id="filter-bar" class="flex items-center gap-2">
+  <nav id="catalogo" class="sticky top-14 sm:top-16 md:top-20 z-40 bg-cream/95 backdrop-blur-sm border-b border-panel-border py-2.5 sm:py-3.5 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2 sm:gap-3 overflow-x-auto py-0.5" style="scrollbar-width: none; -ms-overflow-style: none;">
+        <span class="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-charcoal/40 shrink-0 mr-0.5">Filtrar:</span>
+        <div id="filter-bar" class="flex items-center gap-1.5 sm:gap-2">
           <!-- Filters injected by JS -->
         </div>
       </div>
-      <div class="text-xs font-mono text-charcoal/40 shrink-0" id="product-count"></div>
+      <div class="text-[11px] sm:text-xs font-mono text-charcoal/50 shrink-0 whitespace-nowrap pl-1" id="product-count"></div>
     </div>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════
        4. PRODUCT CATALOG GRID
        ═══════════════════════════════════════════════════════ -->
-  <main class="max-w-7xl mx-auto px-6 py-12">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     <!-- Loading state -->
     <div id="catalog-loading" class="py-20 text-center">
       <p class="type-label text-charcoal/40 tracking-widest">Cargando catálogo…</p>
@@ -131,14 +167,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ═══════════════════════════════════════════════════════
        5. CÓMO FUNCIONA (EDITORIAL LAYOUT — NO BOXES)
        ═══════════════════════════════════════════════════════ -->
-  <section id="como-funciona" class="max-w-7xl mx-auto px-6 pt-24 pb-20 border-t border-card-border">
+  <section id="como-funciona" class="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-14 sm:pb-20 border-t border-card-border">
     <!-- Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-card-border">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 pb-8 sm:pb-12 border-b border-card-border">
       <div>
-        <span class="block text-xs font-mono uppercase tracking-[0.25em] text-ochre mb-2">
+        <span class="block text-xs font-mono uppercase tracking-[0.25em] text-ochre mb-1.5">
           Proceso de compra
         </span>
-        <h2 class="type-display text-3xl sm:text-4xl lg:text-5xl text-charcoal">
+        <h2 class="type-display text-2xl sm:text-4xl lg:text-5xl text-charcoal">
           ¿Cómo funciona?
         </h2>
       </div>
@@ -148,14 +184,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
 
     <!-- 3 Editorial Columns (No boxes, pure typography & hairline dividers) -->
-    <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-card-border pt-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-card-border pt-6 sm:pt-10">
       
       <!-- Step 01 -->
-      <div class="pt-8 md:pt-0 md:pr-10 pb-8 md:pb-0 space-y-3">
-        <span class="type-display text-4xl sm:text-5xl text-ochre font-normal block">
+      <div class="py-6 md:py-0 md:pr-10 first:pt-0 space-y-2.5">
+        <span class="type-display text-3xl sm:text-5xl text-ochre font-normal block">
           01
         </span>
-        <h3 class="type-display text-xl text-charcoal">
+        <h3 class="type-display text-lg sm:text-xl text-charcoal">
           Explora el catálogo
         </h3>
         <p class="text-xs text-charcoal/60 leading-relaxed">
@@ -164,11 +200,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Step 02 -->
-      <div class="pt-8 md:pt-0 md:px-10 pb-8 md:pb-0 space-y-3">
-        <span class="type-display text-4xl sm:text-5xl text-ochre font-normal block">
+      <div class="py-6 md:py-0 md:px-10 space-y-2.5">
+        <span class="type-display text-3xl sm:text-5xl text-ochre font-normal block">
           02
         </span>
-        <h3 class="type-display text-xl text-charcoal">
+        <h3 class="type-display text-lg sm:text-xl text-charcoal">
           Aparta por WhatsApp
         </h3>
         <p class="text-xs text-charcoal/60 leading-relaxed">
@@ -177,11 +213,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Step 03 -->
-      <div class="pt-8 md:pt-0 md:pl-10 space-y-3">
-        <span class="type-display text-4xl sm:text-5xl text-ochre font-normal block">
+      <div class="py-6 md:py-0 md:pl-10 last:pb-0 space-y-2.5">
+        <span class="type-display text-3xl sm:text-5xl text-ochre font-normal block">
           03
         </span>
-        <h3 class="type-display text-xl text-charcoal">
+        <h3 class="type-display text-lg sm:text-xl text-charcoal">
           Entrega en Mexicali
         </h3>
         <p class="text-xs text-charcoal/60 leading-relaxed">
@@ -195,8 +231,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- ═══════════════════════════════════════════════════════
        6. COMPACT BRANDED FOOTER
        ═══════════════════════════════════════════════════════ -->
-  <footer class="mt-12 bg-hero-bg text-cream/90 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-6">
+  <footer class="mt-12 sm:mt-16 bg-hero-bg text-cream/90 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
       
       <!-- Brand & Location -->
       <div class="flex items-center gap-3">
@@ -208,13 +244,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <!-- Navigation Links -->
-      <nav class="flex items-center gap-8 text-xs font-mono tracking-wider uppercase text-cream/60">
+      <nav class="flex items-center gap-6 sm:gap-8 text-xs font-mono tracking-wider uppercase text-cream/60">
         <a href="#catalogo" class="hover:text-cream transition-editorial">Catálogo</a>
         <a href="#como-funciona" class="hover:text-cream transition-editorial">Cómo Funciona</a>
       </nav>
 
       <!-- Phone, WhatsApp & Copyright -->
-      <div class="flex flex-wrap items-center justify-center md:justify-end gap-5 text-xs font-mono text-cream/60">
+      <div class="flex flex-col sm:flex-row items-center justify-center md:justify-end gap-3 sm:gap-5 text-xs font-mono text-cream/60 text-center">
         <a
           href="https://wa.me/526861868611"
           target="_blank"
@@ -314,7 +350,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       ? allProducts
       : allProducts.filter(p => p.categoria === activeFilter);
 
-    countEl.textContent = `${filtered.length} artículo${filtered.length !== 1 ? 's' : ''} disponible${filtered.length !== 1 ? 's' : ''}`;
+    countEl.textContent = `${filtered.length} artículo${filtered.length !== 1 ? 's' : ''}`;
 
     if (filtered.length === 0) {
       gridEl.innerHTML = `
@@ -377,31 +413,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </a>
 
         <!-- Info -->
-        <div class="p-5 flex-1 flex flex-col justify-between">
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
           <div class="flex flex-col gap-2">
-            <div class="flex items-start justify-between gap-3 min-h-[3.25rem]">
+            <div class="flex items-start justify-between gap-2 min-h-[3rem] sm:min-h-[3.25rem]">
               <a href="/producto?id=${product.id}" class="hover:text-ochre transition-editorial min-w-0">
-                <h2 class="type-display-sm text-lg leading-snug text-charcoal line-clamp-2 ${isSold ? 'line-through opacity-50' : ''}">
+                <h2 class="type-display-sm text-base sm:text-lg leading-snug text-charcoal line-clamp-2 ${isSold ? 'line-through opacity-50' : ''}">
                   ${product.nombre}
                 </h2>
               </a>
-              <div class="type-mono text-lg font-bold shrink-0 text-right ${isSold ? 'line-through opacity-50 text-charcoal/40' : 'text-charcoal'}">
-                $${priceFormatted} <span class="text-[0.65rem] font-normal opacity-60 block text-right tracking-tight">MXN</span>
+              <div class="type-mono text-base sm:text-lg font-bold shrink-0 text-right whitespace-nowrap ${isSold ? 'line-through opacity-50 text-charcoal/40' : 'text-charcoal'}">
+                $${priceFormatted} <span class="text-[0.65rem] font-normal opacity-60">MXN</span>
               </div>
             </div>
 
-            <p class="text-xs text-charcoal/50 leading-relaxed line-clamp-2 min-h-[2.5rem]">
+            <p class="text-xs text-charcoal/50 leading-relaxed line-clamp-2 min-h-[2.25rem] sm:min-h-[2.5rem]">
               ${product.descripcion || ''}
             </p>
           </div>
 
-          <div class="pt-4 mt-auto">
+          <div class="pt-3 sm:pt-4 mt-auto">
             ${!isSold
               ? `<a
                   href="${whatsappUrl}"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-mono tracking-wider uppercase bg-forest text-cream hover:bg-forest-hover active:scale-[0.98] transition-all shadow-xs"
+                  class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-mono tracking-wider uppercase bg-forest text-cream hover:bg-forest-hover active:scale-[0.98] transition-all shadow-xs"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
