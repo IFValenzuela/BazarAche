@@ -39,14 +39,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
        2. COHESIVE FULL-BLEED HERO
        ═══════════════════════════════════════════════════════ -->
   <section class="relative overflow-hidden bg-hero-bg text-cream">
-    <!-- Background image: full bleed edge-to-edge on both mobile & desktop -->
+    <!-- Background image: chair logo shifted right on mobile so text is 100% clear on left -->
     <div 
-      class="absolute inset-0 z-0 bg-cover bg-[center_right_25%] md:bg-center"
+      class="absolute inset-0 z-0 bg-cover bg-[position:95%_center] md:bg-center"
       style="background-image: url('/BazarAche.png');"
     ></div>
 
-    <!-- Subtle gradient overlay on mobile to guarantee typography contrast -->
-    <div class="md:hidden absolute inset-0 z-0 bg-gradient-to-r from-hero-bg/95 via-hero-bg/75 to-transparent"></div>
+    <!-- Dark gradient overlay on mobile to guarantee crystal clear typography on left -->
+    <div class="md:hidden absolute inset-0 z-0 bg-gradient-to-r from-hero-bg/95 via-hero-bg/70 to-transparent"></div>
 
     <!-- Desktop Grid (md and up) -->
     <div class="hidden md:grid relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-24 grid-cols-[1fr_auto_1fr] gap-10 items-end min-h-[480px]">
@@ -100,7 +100,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <!-- Mobile Hero Layout (clean, full-bleed, high-end editorial) -->
     <div class="md:hidden relative z-10 px-5 pt-14 pb-12 flex flex-col justify-end min-h-[340px] text-left space-y-4">
-      <div class="space-y-2 max-w-[280px]">
+      <div class="space-y-2 max-w-[240px]">
         <span class="block text-[10px] font-mono uppercase tracking-[0.2em] text-warm-gold drop-shadow-sm">
           Nuevos y Seminuevos en Mexicali
         </span>
@@ -138,9 +138,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
 
-      <!-- Item Counter (Pinned securely on right with hairline divider) -->
-      <div class="shrink-0 pl-3 border-l border-card-border/70">
-        <span class="text-[11px] sm:text-xs font-mono text-charcoal/50 whitespace-nowrap" id="product-count"></span>
+      <!-- Item Counter with soft gradient fade shadow before the separator -->
+      <div class="relative shrink-0 pl-3 border-l border-card-border/70 bg-cream/95">
+        <!-- Soft fade shadow overlay to smoothly dissolve overflowing category chips -->
+        <div class="pointer-events-none absolute -left-8 top-0 bottom-0 w-8 bg-gradient-to-r from-transparent to-cream/95"></div>
+        <span class="relative z-10 text-[11px] sm:text-xs font-mono text-charcoal/50 whitespace-nowrap" id="product-count"></span>
       </div>
 
     </div>
