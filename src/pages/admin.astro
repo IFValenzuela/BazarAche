@@ -202,6 +202,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 </div>
               </div>
 
+              <div class="flex items-center justify-between">
+                <div>
+                  <label for="form-imagen-completa" class="type-label text-[0.6rem] text-charcoal/50 block">Imagen completa</label>
+                  <p class="text-[0.55rem] text-charcoal/35 mt-0.5">Muestra la imagen sin recortes en el catálogo</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input id="form-imagen-completa" type="checkbox" class="sr-only peer" />
+                  <div class="w-9 h-5 bg-charcoal/15 rounded-full peer-checked:bg-forest transition-editorial after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-full"></div>
+                </label>
+              </div>
+
               <div id="form-error" class="text-xs text-red-700 hidden"></div>
               <div id="form-success" class="text-xs text-forest hidden"></div>
 
@@ -303,6 +314,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   
   const formImagen = document.getElementById('form-imagen');
   const galleryPreview = document.getElementById('gallery-preview');
+  const formImagenCompleta = document.getElementById('form-imagen-completa');
 
   // ── Auth & Login ─────────────────────────────────────────
   async function checkAuth() {
@@ -493,6 +505,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     formCategoria.value = product.categoria;
     formPrecio.value = product.precio;
     formEstado.value = product.estado;
+    formImagenCompleta.checked = product.imagen_completa || false;
 
     // Load gallery
     galleryItems = [];
@@ -517,6 +530,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     formCancelBtn.classList.add('hidden');
     productForm.reset();
     formProductId.value = '';
+    formImagenCompleta.checked = false;
     
     galleryItems = [];
     renderGalleryPreview();
@@ -648,6 +662,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const categoria = formCategoria.value.trim();
       const precio = parseFloat(formPrecio.value);
       const estado = formEstado.value;
+      const imagen_completa = formImagenCompleta.checked;
 
       if (!nombre || !categoria || isNaN(precio)) {
         throw new Error('Completa todos los campos obligatorios.');
@@ -665,7 +680,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const imagen_url = primaryItem ? primaryItem.url : null;
       const galeria = galleryItems.filter(i => i !== primaryItem).map(i => i.url);
 
-      const dbData = { nombre, descripcion, categoria, precio, estado, imagen_url, galeria };
+      const dbData = { nombre, descripcion, categoria, precio, estado, imagen_url, galeria, imagen_completa };
 
       if (editingId) {
         const { error } = await supabase.from('products').update(dbData).eq('id', editingId);

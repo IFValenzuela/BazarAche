@@ -14,6 +14,7 @@ create table if not exists public.products (
   galeria     text[] default '{}'::text[],
   estado      text not null default 'disponible'
                 check (estado in ('disponible', 'vendido')),
+  imagen_completa boolean not null default false,
   created_at  timestamptz not null default now()
 );
 
@@ -22,6 +23,7 @@ create table if not exists public.products (
 -- ============================================================
 -- alter table public.products add column if not exists descripcion text;
 -- alter table public.products add column if not exists galeria text[] default '{}'::text[];
+-- alter table public.products add column if not exists imagen_completa boolean not null default false;
 
 -- 2. Enable Row-Level Security
 alter table public.products enable row level security;

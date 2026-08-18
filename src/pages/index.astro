@@ -396,13 +396,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     return `
       <article class="catalog-card ${isSold ? 'catalog-card--sold' : ''} group">
         <!-- Image -->
-        <a href="/producto?id=${product.id}" class="catalog-card__image block">
+        <a href="/producto?id=${product.id}" class="catalog-card__image block ${product.imagen_completa ? 'catalog-card__image--full' : ''}">
           ${product.imagen_url
             ? `<img
                 src="${product.imagen_url}"
                 alt="${product.nombre}"
                 loading="lazy"
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${isSold ? 'grayscale opacity-60' : ''}"
+                class="w-full h-full ${product.imagen_completa ? 'object-contain' : 'object-cover'} transition-transform duration-500 group-hover:scale-[1.03] ${isSold ? 'grayscale opacity-60' : ''}"
               />`
             : `<div class="w-full h-full bg-cream-dark flex items-center justify-center">
                 <span class="type-label text-charcoal/20">Sin imagen</span>
@@ -526,6 +526,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     overflow: hidden;
     aspect-ratio: 4 / 3;
     background-color: var(--color-cream-dark);
+  }
+
+  /* Full-image mode: show entire image without cropping */
+  .catalog-card__image--full {
+    background-color: #ffffff;
+  }
+
+  .catalog-card__image--full img {
+    padding: 0.75rem;
   }
 
   /* ── Filter Buttons ───────────────────────────────────── */
